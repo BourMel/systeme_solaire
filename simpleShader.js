@@ -1,10 +1,10 @@
-/*************/
-/** SHADERS **/
-/*************/
+/*****************************/
+/** SHADER : apply textures **/
+/*****************************/
 
-/** SUN VERTEX SHADER **/
+/** VERTEX SHADER **/
 
-var sunVertexShader = `#version 300 es
+var simpleVertexShader = `#version 300 es
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -27,9 +27,9 @@ void main()
 
 `;
 
-/** SUN FRAGMENT SHADER **/
+/** FRAGMENT SHADER **/
 
-var sunFragmentShader = `#version 300 es
+var simpleFragmentShader = `#version 300 es
 precision highp float;
 
 uniform sampler2D uSampler;
