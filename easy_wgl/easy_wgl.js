@@ -14,14 +14,14 @@ function loadRequiredFiles(files,callback)
 	let loadRqFi = function(files,callback)
 	{
 		let filesloaded = 0;
-		function finishLoad() 
+		function finishLoad()
 		{
-			if (filesloaded === files.length) 
+			if (filesloaded === files.length)
 			{
 				callback();
 			}
 		}
-	
+
 		if (files.length === 0)
 		{
 			callback();
@@ -51,7 +51,7 @@ function loadRequiredFiles(files,callback)
 			}
 		});
 	};
-	
+
 	if (files.length > 1)
 	{
 		let first = files.shift();
@@ -100,7 +100,7 @@ const BufferVec =
 		for (let k =0; k< v.dim; k++)
 		{
 			this[j++] = v.data[k];
-		}	
+		}
 	}
 	,
 	push: function(v)
@@ -266,7 +266,7 @@ const Vec_ops =
 		const n = a.length;
 		let vc = this.Vec();
 		let c = vc.data;
-				
+
 		for (let i = 0; i < n; i++)
 		{
 			c[i] = a[i] * s;
@@ -326,7 +326,7 @@ const Vec_ops =
 	neg: function(res)
 	{
 		return this.scalarmult(-1);
-	}, 
+	},
 
 	dot: function(vb)
 	{
@@ -413,7 +413,7 @@ let Vec3_ops = Object.assign(Object.create(Vec_ops),
 });
 
 
-function Vec2() 
+function Vec2()
 {
 	let data = new Float32Array(2);
 
@@ -437,10 +437,10 @@ function Vec2()
 		}
 	}
 
-	return Object.assign(Object.create(Vec2_ops), {data,Vec:Vec2}); 
+	return Object.assign(Object.create(Vec2_ops), {data,Vec:Vec2});
 }
 
-function Vec3() 
+function Vec3()
 {
 	let data = new Float32Array(3);
 
@@ -469,13 +469,13 @@ function Vec3()
 	return Object.assign(Object.create(Vec3_ops), {data,Vec:Vec3});
 }
 
-function Vec3_buff(buff,i) 
+function Vec3_buff(buff,i)
 {
 	let data = buff.subarray(3*i, 3*i+3);
 	return Object.assign(Object.create(Vec3_ops), {data,Vec:Vec3});
 }
 
-function Vec4() 
+function Vec4()
 {
 	let data = new Float32Array(4);
 
@@ -495,14 +495,14 @@ function Vec4()
 			{
 				arguments[i].data.forEach( e => {data[j++]=e;});
 			}
-			else 
+			else
 			{
 				data[j++] = arguments[i];
 			}
 		}
 	}
 
-	return Object.assign(Object.create(Vec_ops), {data,Vec:Vec4}); 
+	return Object.assign(Object.create(Vec_ops), {data,Vec:Vec4});
 }
 
 
@@ -590,7 +590,7 @@ const Mat_ops =
 		}
 		return mc;
 	},
-	
+
 	transpose: function()
 	{
 		let transp = this.Mat();
@@ -644,7 +644,7 @@ const Mat2_ops = Object.assign(Object.create(Mat_ops),
 
 		if (mb.data.length == 2)
 		{
-			return this.vectmult(mb);		
+			return this.vectmult(mb);
 		}
 	},
 
@@ -666,7 +666,7 @@ let Mat3_ops = Object.assign(Object.create(Mat_ops),
 		vc.data[2] = a[2]*b[0] + a[5]*b[1] + a[8]*b[2];
 		return vc;
 	},
-	
+
 	mult: function(mb)
 	{
 		if (mb.data == undefined)
@@ -690,7 +690,7 @@ let Mat3_ops = Object.assign(Object.create(Mat_ops),
 
 		if (mb.data.length == 3)
 		{
-			return this.vecmult(mb);		
+			return this.vecmult(mb);
 		}
 	},
 
@@ -740,7 +740,7 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 
 		if (mb.data.length == 4)
 		{
-			return this.vecmult(mb);		
+			return this.vecmult(mb);
 		}
 	},
 
@@ -757,7 +757,7 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 			c[i+8]  = a[i]*b[8] +  a[i+4]*b[9] +  a[i+8]*b[10];
 		}
 		c[3]=a[3]; c[7]=a[7]; c[11]=a[11]; c[15]=a[15];
-		c[12]=a[12]; c[13]=a[13]; c[14]=a[14]; 
+		c[12]=a[12]; c[13]=a[13]; c[14]=a[14];
 		return mc;
 	},
 
@@ -775,7 +775,7 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 			c[i+8]  = a[i]*b[8] +  a[i+4]*b[9] +  a[i+8]*b[10];
 		}
 		c[3]=b[3]; c[7]=b[7]; c[11]=b[11]; c[15]=b[15];
-		c[12]=b[12]; c[13]=b[13]; c[14]=b[14]; 
+		c[12]=b[12]; c[13]=b[13]; c[14]=b[14];
 		return mc;
 	},
 
@@ -822,7 +822,7 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 		inv[8]=   d * (m[0 * 4 + 0] * m[1 * 4 + 1] - m[0 * 4 + 1] * m[1 * 4 + 0]);
 		return invm
 	},
-	
+
 	inverse: function()
 	{
 		let invm = Mat4();
@@ -974,7 +974,7 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 		const x = Math.abs(this.data[d*4]);
 		const y = Math.abs(this.data[d*4+1]);
 		const z = Math.abs(this.data[d*4+2]);
-		
+
 		if ((x>y)&&(x>z))
 		{
 			return 0;
@@ -993,21 +993,21 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 		let l = Math.sqrt(m[0]*m[0]+m[1]*m[1]+m[2]*m[2]);
 		for (let i=0; i<3; i++)
 		{
-			m[i] = (i ==xd) ? Math.sign(m[i])*l :0;			
+			m[i] = (i ==xd) ? Math.sign(m[i])*l :0;
 		}
 
 		const yd = this.main_dir(1);
 		l = Math.sqrt(m[4]*m[4]+m[5]*m[5]+m[6]*m[6]);
 		for (let i=0; i<3; i++)
 		{
-			m[4+i] = (i ==yd) ? Math.sign(m[4+i])*l :0;			
+			m[4+i] = (i ==yd) ? Math.sign(m[4+i])*l :0;
 		}
 
 		const zd = this.main_dir(2);
 		l = Math.sqrt(m[8]*m[8]+m[9]*m[9]+m[10]*m[10]);
 		for (let i=0; i<3; i++)
 		{
-			m[8+i] = (i ==zd) ? Math.sign(m[8+i])*l :0;			
+			m[8+i] = (i ==zd) ? Math.sign(m[8+i])*l :0;
 		}
 	},
 
@@ -1019,41 +1019,41 @@ let Mat4_ops = Object.assign(Object.create(Mat_ops),
 
 
 
-function zeroMat2() 
+function zeroMat2()
 {
 	return Object.assign(Object.create(Mat2_ops),{data:new Float32Array(4), Mat:Mat2});
 }
 
 
-function zeroMat3() 
+function zeroMat3()
 {
 	return Object.assign(Object.create(Mat3_ops),{data:new Float32Array(9), Mat:Mat3});
 }
 
 
-function zeroMat4() 
+function zeroMat4()
 {
 	return Object.assign(Object.create(Mat4_ops),{data:new Float32Array(16), Mat:Mat4});
 }
 
-function Mat2() 
+function Mat2()
 {
 	return Object.assign(Object.create(Mat2_ops),{data:new Float32Array(4), Mat:Mat2}).id();
 }
 
 
-function Mat3() 
+function Mat3()
 {
 	return Object.assign(Object.create(Mat3_ops),{data:new Float32Array(9), Mat:Mat3}).id();
 }
 
 
-function Mat4() 
+function Mat4()
 {
 	return Object.assign(Object.create(Mat4_ops),{data:new Float32Array(16), Mat:Mat4}).id();
 }
 
-function Mat4_from_f32a(data) 
+function Mat4_from_f32a(data)
 {
 	return Object.assign(Object.create(Mat4_ops),{data, Mat:Mat4});
 }
@@ -1071,7 +1071,7 @@ function mmult()
 }
 
 
-function scale(sx,sy,sz) 
+function scale(sx,sy,sz)
 {
 	let res = Mat4();
 	let m = res.data;
@@ -1081,7 +1081,7 @@ function scale(sx,sy,sz)
 	return res;
 }
 
-function translate(tx,ty,tz) 
+function translate(tx,ty,tz)
 {
 	let res = Mat4();
 	let m = res.data;
@@ -1178,7 +1178,7 @@ function rotate(beta, axis)
 }
 
 
-function perspective(fov, aspect, near, far) 
+function perspective(fov, aspect, near, far)
 {
 	let res = Mat4();
 	let m = res.data;
@@ -1206,7 +1206,7 @@ function perspective(fov, aspect, near, far)
 }
 
 
-function ortho(aspect, near, far) 
+function ortho(aspect, near, far)
 {
 	let res = Mat4();
 	let m = res.data;
@@ -1272,7 +1272,7 @@ function quat_to_Mat4(q)
 	const sqz = q[2]*q[2];
 
 	const invs = 1 / (sqx + sqy + sqz + sqw)
-	m[0] = ( sqx - sqy - sqz + sqw)*invs ; 
+	m[0] = ( sqx - sqy - sqz + sqw)*invs ;
 	m[5] = (-sqx + sqy - sqz + sqw)*invs ;
 	m[10] = (-sqx - sqy + sqz + sqw)*invs ;
 
@@ -1328,7 +1328,7 @@ bind: function()
 
 }
 
-function VBO(buffer=null, nb_floats=3) 
+function VBO(buffer=null, nb_floats=3)
 {
 	let id = gl.createBuffer();
 	let length=0;
@@ -1362,7 +1362,7 @@ bind: function()
 
 }
 
-function EBO(buffer) 
+function EBO(buffer)
 {
 	let id = gl.createBuffer();
 	let length = 0;
@@ -1495,9 +1495,9 @@ let ShaderProgram_ops=
 
 	search_attribute_loc: function()
 	{
-		this.locations.forEach( (v,k) => 
+		this.locations.forEach( (v,k) =>
 		{
-			if (v<0) 
+			if (v<0)
 			{
 				let loc = gl.getAttribLocation(this.prg,k)
 				this.locations.set(k, loc);
@@ -1521,7 +1521,7 @@ let ShaderProgram_ops=
 			a = src.indexOf("/*");
 			b = (a===-1)?-1:src.indexOf("*/",a);
 		}
-		
+
 		a = src.indexOf("//");
 		b = (a===-1)?-1:src.indexOf("\n",a);
 		while (a >= 0 && b>=0)
@@ -1544,7 +1544,7 @@ let ShaderProgram_ops=
 
 		let lines= uniform_lines(vsrc).concat(uniform_lines(fsrc));
 
-		for(let i= 0; i < lines.length; i++) 
+		for(let i= 0; i < lines.length; i++)
 		{
 			if (lines[i])
 			{
@@ -1552,7 +1552,7 @@ let ShaderProgram_ops=
 
 
 				let dec = (lines[i].indexOf('highp') < 0 && lines[i].indexOf('mediump') < 0 && lines[i].indexOf('lowp') < 0) ?0:1;
-				
+
 
 				const utype = unif[1+dec];
 				const uname = unif[2+dec];
@@ -1560,7 +1560,7 @@ let ShaderProgram_ops=
 				if (uniformIndices[0] <4000000000)
 				{
 					let uindice =  gl.getUniformLocation(this.prg,uname);
-					this.locations[uname] = uindice;		
+					this.locations[uname] = uindice;
 					const uniformSizes = gl.getActiveUniforms(this.prg, uniformIndices, gl.UNIFORM_SIZE);
 					const sz = uniformSizes[0];
 					switch (utype)
@@ -1641,7 +1641,7 @@ let ShaderProgram_ops=
 						};
 						break;
 					case 'vec4':
-						this.unif_call_map[uname] = function(v) { 
+						this.unif_call_map[uname] = function(v) {
 							if (v.data)
 							{
 								gl.uniform4fv(uindice,v.data);
@@ -1703,7 +1703,7 @@ let ShaderProgram_ops=
 		gl.compileShader(shader);
 		let ok = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
 		let infolog = gl.getShaderInfoLog(shader);
-		if (!ok) 
+		if (!ok)
 		{
 			ewgl_console.error("Erreur de compilation dans "+shader_name);
 			ewgl_console.error(infolog);
@@ -1735,7 +1735,7 @@ let ShaderProgram_ops=
 			ewgl_console.warning("Attention a la compil de "+shader_name);
 			ewgl_console.warning(infolog);
 		}
-		
+
 		return shader;
 	},
 
@@ -1745,7 +1745,7 @@ let ShaderProgram_ops=
 		{
 			return this.compile_transform_feedback_program();
 		}
-		
+
 		let vs = this.compile_shader(this.v_src, gl['VERTEX_SHADER'], this.sh_name+'.vert');
 		let fs = this.compile_shader(this.f_src, gl['FRAGMENT_SHADER'], this.sh_name+'.frag');
 		if (!vs || !fs)
@@ -1763,7 +1763,7 @@ let ShaderProgram_ops=
 		this.search_attribute_loc();
 		this.search_uniforms(v_ncom,f_ncom);
 		this.compilation_ok = gl.getProgramParameter(this.prg, gl.LINK_STATUS);
-		
+
 		let infolog = gl.getProgramInfoLog(this.prg);
 
 		if (!this.compilation_ok)
@@ -1795,12 +1795,12 @@ let ShaderProgram_ops=
 		let p1 = new Promise((resolve,reject) => {
 				let xhr1 = new XMLHttpRequest();
 				xhr1.onload = () => {
-					let v_src=xhr1.responseText; 
+					let v_src=xhr1.responseText;
 					let xhr2 = new XMLHttpRequest();
 					xhr2.onload = () => {
 						let f_src=xhr2.responseText;
 						this.create_program(v_src,f_src,v_url,f_url);
-						resolve(); 
+						resolve();
 					};
 					xhr2.open("GET", f_url, true);
 					xhr2.send();
@@ -1814,7 +1814,7 @@ let ShaderProgram_ops=
 
 	compile_transform_feedback_program: function()
 	{
-		let fsrc = `#version 300 es 
+		let fsrc = `#version 300 es
 		precision highp float;void main(){}`
 
 		this.prg = gl.createProgram();
@@ -1951,7 +1951,7 @@ let Texture2d_ops =
 		return new Promise((resolve,reject) => {
 			let img = new Image();
 			img.src = url;
-			img.addEventListener('load', () => 
+			img.addEventListener('load', () =>
 			{
 				this.width = img.width;
 				this.height = img.height;
@@ -1995,7 +1995,7 @@ function Texture2d()
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);	
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 	for(let i=0; i<arguments.length; ++i)
 	{
 		gl.texParameteri(gl.TEXTURE_2D, arguments[i][0], arguments[i][1]);
@@ -2060,8 +2060,8 @@ function Texture3d()
 	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);	
-	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_WRAP_R, gl.CLAMP_TO_EDGE);	
+	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_3D, gl.TEXTURE_WRAP_R, gl.CLAMP_TO_EDGE);
 
 	for(let i=0; i<arguments.length; ++i)
 	{
@@ -2142,8 +2142,8 @@ function FBO(colors_attach, depth_attach)
 		gl.bindRenderbuffer( gl.RENDERBUFFER, null);
 	}
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	
-	return Object.assign(Object.create(FBO_ops),{id,colors_attach,depthRenderBuffer}); 
+
+	return Object.assign(Object.create(FBO_ops),{id,colors_attach,depthRenderBuffer});
 }
 
 function unbind_fbo()
@@ -2153,7 +2153,7 @@ function unbind_fbo()
 
 
 
-let TransformFeedback_ops = 
+let TransformFeedback_ops =
 {
 	start: function(primitive,vbos)
 	{
@@ -2195,14 +2195,14 @@ function create_BB()
 		const B = arguments[1];
 		let C = A.add(B).mult(0.5)
 		let R = B.sub(A).norm()/2;
-		return {min:A , max:B, center:C, radius:R};	
+		return {min:A , max:B, center:C, radius:R};
 	}
 	const C = arguments[0];
 	const R = arguments[1];
 	const vR = Vec3(R,R,R).mult(Math.sqrt(3));
 	let A = C.sub(vR);
 	let B = C.add(vR);
-	return {min:A , max:B, center:C, radius:R};	
+	return {min:A , max:B, center:C, radius:R};
 }
 
 let Mesh_ops =
@@ -2222,17 +2222,17 @@ compute_normals()
 		let iA = Is[i++];
 		let iB = Is[i++];
 		let iC = Is[i++];
-	
+
 		let jA = 3*iA;
 		let jB = 3*iB;
 		let jC = 3*iC;
-		
-		let Ux = this.positions[jB++] - this.positions[jA]; 
-		let Vx = this.positions[jC++] - this.positions[jA++]; 
-		let Uy = this.positions[jB++] - this.positions[jA]; 
-		let Vy = this.positions[jC++] - this.positions[jA++]; 
-		let Uz = this.positions[jB] - this.positions[jA]; 
-		let Vz = this.positions[jC] - this.positions[jA]; 
+
+		let Ux = this.positions[jB++] - this.positions[jA];
+		let Vx = this.positions[jC++] - this.positions[jA++];
+		let Uy = this.positions[jB++] - this.positions[jA];
+		let Vy = this.positions[jC++] - this.positions[jA++];
+		let Uz = this.positions[jB] - this.positions[jA];
+		let Vz = this.positions[jC] - this.positions[jA];
 
 		let nf_x = Uy*Vz - Uz*Vy;
 		let nf_y = Uz*Vx - Ux*Vz;
@@ -2271,7 +2271,7 @@ compute_BB()
 	let x_max =  x_min;
 	let y_max =  y_min;
 	let z_max =  z_min;
-	
+
 	let nb = this.positions.length;
 	for(let i=0;i<nb;)
 	{
@@ -2325,13 +2325,13 @@ renderer: function (p=true, n=true, t=true)
 		this.vbo_n =VBO(this.normals,3);
 		nbv = this.vbo_n.length;
 	}
-	
+
 	if (t && this.texcoords && !this.vbo_t)
 	{
 		this.vbo_t = VBO(this.texcoords,2);
 		nbv = this.vbo_t.length;
 	}
-	
+
 	let vao = VAO([POSITION_ATTRIB, p?this.vbo_p:null], [NORMAL_ATTRIB, n?this.vbo_n:null], [TEXCOORD_ATTRIB, t?this.vbo_t:null]);
 	let vao_normal = VAO([POSITION_ATTRIB, p?this.vbo_p:null, 1], [NORMAL_ATTRIB, n?this.vbo_n:null, 1]);
 
@@ -2383,7 +2383,7 @@ let MeshRenderer_ops = {
 		{q
 			prg_normal = Shader.Program('normal');
 		}
-		
+
 		prg_normal.bind();
 		update_matrices(proj,view);
 		update_uniform('length', length);
@@ -2395,7 +2395,7 @@ let MeshRenderer_ops = {
 };
 
 
-let Mesh = 
+let Mesh =
 {
 
 Cube()
@@ -2478,7 +2478,7 @@ Grid(n=2)
 	}
 	const BB = create_BB(Vec3(-1),Vec3(1));
 
-	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:tc, vbo_t:null,
 			tris: this.Grid_tri_indices(n), lines: this.Grid_line_indices(n), BB});
@@ -2518,7 +2518,7 @@ Tore(n)
 
 	const BB = create_BB(Vec3(-1),Vec3(1));
 
-	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:tc, vbo_t:null,
 			tris: this.Grid_tri_indices(n), lines: this.Grid_line_indices(n), BB});
@@ -2559,7 +2559,7 @@ Cylinder(n)
 
 	const BB = create_BB(Vec3(-1),Vec3(1));
 
-	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:tc, vbo_t:null,
 			tris: this.Grid_tri_indices(n), lines: this.Grid_line_indices(n), BB});
@@ -2596,8 +2596,8 @@ Sphere(n)
 	}
 
 	const BB = create_BB(Vec3(0),1.0);
-	
-	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+
+	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:tc, vbo_t:null,
 			tris: this.Grid_tri_indices(n), lines: this.Grid_line_indices(n), BB});
@@ -2623,16 +2623,16 @@ Wave(n)
 			let h = 0.2*(1-r/2)*Math.sin(Math.PI/2+r*8);
 			pos.push(Vec3(x,y,h));
 
-			let dh = -0.2/2*Math.sin(Math.PI/2+r*8) + 
+			let dh = -0.2/2*Math.sin(Math.PI/2+r*8) +
 					0.2*(1-r/2)*8*Math.cos(Math.PI/2+r*8);
 			let n = Vec3(-x/r*dh,-y/r*dh,1);
 			norm.push(n.normalized());
 		}
 	}
-	
+
 	const BB = create_BB(Vec3(-1),Vec3(1));
 
-	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+	return Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:tc, vbo_t:null,
 			tris: this.Grid_tri_indices(n), lines: this.Grid_line_indices(n),BB});
@@ -2643,7 +2643,7 @@ Wave(n)
 // 	let tempo = JSON.parse(text);
 // 	let normals=null;
 // 	let m = Object.assign(Object.create(Mesh_ops),
-// 			{positions:new Float32Array(tempo.pos), vbo_p:null, 
+// 			{positions:new Float32Array(tempo.pos), vbo_p:null,
 // 			normals, vbo_n:null,
 // 			texcoords:null, vbo_t:null,
 // 			tris: new Uint32Array(tempo.tris), lines: new Uint32Array(tempo.lines)});
@@ -2676,7 +2676,7 @@ OFF_load(text)
 	w =read_word();
 	const nbf = parseInt(w);
 	read_word();
-	
+
 	let pos = create_vec3_buffer(nbv);
 	let norm = create_vec3_buffer(nbv);
 
@@ -2732,8 +2732,8 @@ OFF_load(text)
 			indices.push(loc_buff[j+2]);
 		}
 	}
-	
-	let m = Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+
+	let m = Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:null, vbo_t:null,
 			tris: indices, lines: indicesl});
@@ -2777,7 +2777,7 @@ OBJ_load(text)
 				words.push(text.substr(k, index-k));
 			}
 		}
-		return words;	
+		return words;
 	};
 
 	let nbv = 0;
@@ -2844,8 +2844,8 @@ OBJ_load(text)
 	buff_norm.forEach(n => { norm.push(n);});
 	buff_indices.forEach(i => { indices.push(i); });
 	buff_indicesl.forEach(i => { indicesl.push(i); });
-	
-	let m = Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null, 
+
+	let m = Object.assign(Object.create(Mesh_ops), {positions:pos, vbo_p:null,
 			normals: norm, vbo_n:null,
 			texcoords:null, vbo_t:null,
 			tris: indices, lines: indicesl});
@@ -2864,19 +2864,19 @@ load(blob)
 	let reader = new FileReader();
 	return new Promise( (resolve, reject) =>
 	{
-		reader.onerror = () => 
+		reader.onerror = () =>
 		{
 			reader.abort();
 			ewgl_console.error('can not load '+blob.name)
 			reject();
     	};
-		reader.onload = () => 
+		reader.onload = () =>
 		{
-			if (blob.name.match(/off|OFF$/)) 
+			if (blob.name.match(/off|OFF$/))
 			{
 				resolve(this.OFF_load(reader.result));
 			}
-			else if (blob.name.match(/obj|OBJ$/)) 
+			else if (blob.name.match(/obj|OBJ$/))
 			{
 				resolve(this.OBJ_load(reader.result));
 			}
@@ -2884,7 +2884,7 @@ load(blob)
 			{
 				ewgl_console.error('can not load '+blob.name)
 				reject();
-			}		
+			}
 		};
 		reader.readAsText(blob);
 	});
@@ -3070,7 +3070,7 @@ function set_widget_color(node,col,bg)
 }
 
 
-const UserInterface = 
+const UserInterface =
 {
 	interf: null,
 	par: [],
@@ -3177,7 +3177,7 @@ const UserInterface =
 
 		let la = document.createElement("legend");
 		la.innerText = label;
-		
+
 		fs.appendChild(la);
 
 		fs.style['border-width'] = bwidth;
@@ -3264,7 +3264,7 @@ const UserInterface =
 		let cb = document.createElement("input");
 		cb.type="checkbox";
 		cb.checked=val;
-		
+
 		let la = document.createElement("label");
 		la.Htmlfor = cb.id;
 		la.innerText = label;
@@ -3309,7 +3309,7 @@ const UserInterface =
 
 	add_shader_edit: function(prg)
 	{
-		let compil_func = () => 
+		let compil_func = () =>
 		{
 			ewgl_console.info('Compilation de '+prg.sh_name);
 			if (prg.compile())
@@ -3319,7 +3319,7 @@ const UserInterface =
 			update_wgl();
 		};
 
-		CodeMirror.commands.autocomplete = function(cm) 
+		CodeMirror.commands.autocomplete = function(cm)
 		{
 			cm.showHint({hint: CodeMirror.hint.anyword});
 		}
@@ -3331,7 +3331,7 @@ const UserInterface =
 		let first_node = this.interf.lastChild.previousSibling; // b node
 
 		let code_edit_v = CodeMirror(fs,{ value:prg.v_src,
-			theme: "monokai", 
+			theme: "monokai",
 			mode: "text/x-glsl-es3",
 			indentUnit: 4,
 			lineNumbers: true,
@@ -3372,7 +3372,7 @@ const UserInterface =
 
 		this.use_group('H');
 
-		this.add_button('compile', () => { 
+		this.add_button('compile', () => {
 			prg.v_src = code_edit_v.getValue();
 			if (prg.f_src)
 			{
@@ -3382,7 +3382,7 @@ const UserInterface =
 
 		this.add_hspace(4);
 		let fname = this.add_text_input(prg.sh_name)
-		this.add_button('save', () => { 
+		this.add_button('save', () => {
 			save_text(code_edit_v.getValue(), fname.value + ".vert");
 			save_text(code_edit_f.getValue(), fname.value + ".frag");});
 		this.add_hspace(2);
@@ -3393,7 +3393,7 @@ const UserInterface =
 			switch (li.value) {
 				case '1':
 					foc.getDoc().replaceRange('uniform float '+uname.value+'; \n',foc.getCursor());
-					let sl = this.add_slider(uname.value,0,100,0, () => 
+					let sl = this.add_slider(uname.value,0,100,0, () =>
 					{
 						prg.bind();
 						update_uniform(uname.value,sl.value*0.01);
@@ -3452,7 +3452,7 @@ const UserInterface =
 		/*
 		this.add_button('+U', () => {
 			foc.getDoc().replaceRange('uniform float '+uname.value+'; \n',foc.getCursor());
-			let sl = this.add_slider(uname.value,0,100,0, () => 
+			let sl = this.add_slider(uname.value,0,100,0, () =>
 			{
 				prg.bind();
 				update_uniform(uname.value,sl.value*0.01);
@@ -3462,7 +3462,7 @@ const UserInterface =
 		});
 		this.add_button('+Uv3', () => {
 			foc.getDoc().replaceRange('uniform vec3 '+uname.value+'; \n',foc.getCursor());
-			let f = () => 
+			let f = () =>
 			{
 				prg.bind();
 				update_uniform(uname.value,sl1.value*0.01,sl2.value*0.01,sl3.value*0.01);
@@ -3487,7 +3487,7 @@ const UserInterface =
 				ewgl_code_editors.pop();
 			}
 			this.adjust_width();
-		}); 
+		});
 		this.end_use();
 		this.end_use();
 		let last_node = this.interf.lastChild;
@@ -3536,7 +3536,7 @@ const UserInterface =
 		this.add_br();
 		return inptext;
 	},
-	
+
 	add_list_input: function(items, i, func)
 	{
 		let fs = document.createElement("fieldset");
@@ -3649,7 +3649,7 @@ let MouseManipulator2D_ops =
 				mousedown_wgl(ev);
 			}
 		});
-	
+
 		canvas.addEventListener('mouseup', ev =>
 		{
 			if (typeof mouseup_wgl === 'function')
@@ -3670,7 +3670,7 @@ let MouseManipulator2D_ops =
 				mousemove_wgl(ev);
 			}
 		});
-	
+
 		canvas.addEventListener('wheel', ev =>
 		{
 			ev.stopImmediatePropagation();
@@ -3742,7 +3742,7 @@ let MouseManipulator3D_ops =
 	manip: function(obj)
 	{
 		this.obj = obj;
-		this.inv_cam = this.camera.frame.inverse();	
+		this.inv_cam = this.camera.frame.inverse();
 	},
 
 	init()
@@ -3831,7 +3831,7 @@ let MouseManipulator3D_ops =
 			}
 			internal_update_wgl_needed = true;
 		});
-	
+
 		canvas.addEventListener('mouseup', ev =>
 		{
 			if ((ev.button !== 0))
@@ -3943,7 +3943,7 @@ let MouseManipulator3D_ops =
 			}
 			internal_update_wgl_needed = true;
 		});
-	
+
 		canvas.addEventListener('wheel', ev =>
 		{
 			const cam = this.camera;
@@ -3992,7 +3992,7 @@ function MouseManipulator3D(cam)
 }
 
 
-let Camera_ops = 
+let Camera_ops =
 {
 	set_scene_radius: function(r)
 	{
@@ -4042,12 +4042,12 @@ let Camera_ops =
 	{
 		if (arguments.length === 2)
 		{
-			this.s_center = arguments[0]; 
+			this.s_center = arguments[0];
 			this.s_radius = arguments[1];
 		}
 		if (arguments.length === 1)
 		{
-			this.s_center = arguments[0].center; 
+			this.s_center = arguments[0].center;
 			this.s_radius = arguments[0].radius;
 		}
 		this.frame.data[12] = 0;
@@ -4097,13 +4097,13 @@ var ewgl_continuous_update = false;
 
 // function TextFileDroppedOnCanevas(func)
 // {
-// 	canvas.addEventListener("dragenter", e => 
+// 	canvas.addEventListener("dragenter", e =>
 // 	{
 // 		e.stopPropagation();
 // 		e.preventDefault();
 // 	}, false);
 
-// 	canvas.addEventListener("dragover",  e => 
+// 	canvas.addEventListener("dragover",  e =>
 // 	{
 // 		e.stopPropagation();
 // 		e.preventDefault();
@@ -4123,13 +4123,13 @@ var ewgl_continuous_update = false;
 
 function FileDroppedOnCanevas(func)
 {
-	canv_cons_elt.addEventListener("dragenter", e => 
+	canv_cons_elt.addEventListener("dragenter", e =>
 	{
 		e.stopPropagation();
 		e.preventDefault();
 	}, false);
 
-	canv_cons_elt.addEventListener("dragover",  e => 
+	canv_cons_elt.addEventListener("dragover",  e =>
 	{
 		e.stopPropagation();
 		e.preventDefault();
@@ -4154,7 +4154,7 @@ function make_unique_id()
 function save_text(text, filename)
 {
 	let bytes = new Uint8Array(text.length);
-	for (let i = 0; i < text.length; i++) 
+	for (let i = 0; i < text.length; i++)
 	{
 		bytes[i] = text.charCodeAt(i);
 	}
@@ -4173,7 +4173,7 @@ function update_wgl()
 
 function internal_update_wgl()
 {
-	requestAnimationFrame( (ts) => 
+	requestAnimationFrame( (ts) =>
 	{
 		const progress = ts - ts_start;
 		ewgl_current_time += progress/1000.0;
@@ -4232,7 +4232,7 @@ function internal_ui_resize_common()
 		canvas.style['z-index'] = 2;
 		ui_vsep_elt.style.display = 'none';
 	}
-	
+
 	if (interface_on_off && ui_width_interf > 0)
 	{
 		canv_cons_elt.style.width = window.innerWidth - 6 - ui_width_interf +'px';
@@ -4287,7 +4287,7 @@ function ui_resize_2d()
 function ui_resize_3d()
 {
 	internal_ui_resize_common();
-	
+
 	const aspect = gl.canvas.width / gl.canvas.height;
 	scene_camera.set_aspect(aspect);
 
@@ -4335,7 +4335,7 @@ function launch_3d()
 			if (gldebugInfo)
 			{
 				ewgl_console.info('Vendor: '+ gl.getParameter(gldebugInfo.UNMASKED_VENDOR_WEBGL));
-				ewgl_console.info('Renderer: '+ gl.getParameter(gldebugInfo.UNMASKED_RENDERER_WEBGL));	
+				ewgl_console.info('Renderer: '+ gl.getParameter(gldebugInfo.UNMASKED_RENDERER_WEBGL));
 			}
 		});
 }
@@ -4361,7 +4361,7 @@ function launch_2d()
 			if (gldebugInfo)
 			{
 				ewgl_console.info('Vendor: '+ gl.getParameter(gldebugInfo.UNMASKED_VENDOR_WEBGL));
-				ewgl_console.info('Renderer: '+ gl.getParameter(gldebugInfo.UNMASKED_RENDERER_WEBGL));	
+				ewgl_console.info('Renderer: '+ gl.getParameter(gldebugInfo.UNMASKED_RENDERER_WEBGL));
 			}
 		});
 }
@@ -4410,10 +4410,10 @@ document.onkeydown = ev =>
 			ev.preventDefault();
 			ev.stopImmediatePropagation();
 		}
-	}	
+	}
 }
 
-let ProcessImage = 
+let ProcessImage =
 {
 
 	fbo1:null, tex1:null, prg_fs:null,
@@ -4489,13 +4489,13 @@ add_interface: function()
 		this.c = 1; sl_c.value = 1;
 		update_wgl();
 	});
-	
+
 	UserInterface.add_hspace(4);
 	UserInterface.add_button('X', () => {
 		UserInterface.interf.removeChild(this.fs);
 		UserInterface.adjust_width();
 		this.fs = null;
-	}); 
+	});
 
 	UserInterface.end_use();
 	UserInterface.end_use();
@@ -4508,5 +4508,3 @@ function enable_post_process()
 	ProcessImage.enable();
 	ProcessImage.add_interface();
 }
-
-

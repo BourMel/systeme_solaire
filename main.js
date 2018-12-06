@@ -1,6 +1,7 @@
 "use strict"
 
 var simple_program = null;
+var circle_program = null;
 
 let sun_infos = null;
 let mercury_infos = null;
@@ -27,8 +28,9 @@ function init_wgl()
 	// start timer
 	ewgl_continuous_update = true;
 
-	// simple vertex and fragment shaders
+	// PROGRAMS
 	simple_program = ShaderProgram(simpleVertexShader, simpleFragmentShader, 'simple_program');
+	circle_program = ShaderProgram(circleVertexShader, circleFragmentShader, 'circle_program');
 
 	// solar system
 	let sun = Mesh.Sphere(precision);
@@ -200,6 +202,13 @@ function draw_wgl()
 
 	unbind_shader();
 	unbind_texture2d();
+
+
+	circle_program.bind();
+	update_uniform('viewMatrix', solar_system);
+	update_uniform('color', 255, 255, 255);
+	update_uniform('nb', 300);
+	gl.drawArrays(gl.LINE_LOOP, 0, 300);
 }
 
 /*****************************/
