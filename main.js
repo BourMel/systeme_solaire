@@ -205,6 +205,7 @@ function draw_wgl()
 
 
 	circle_program.bind();
+	update_uniform('projectionMatrix', projection_matrix);
 	update_uniform('viewMatrix', solar_system);
 	update_uniform('color', 255, 255, 255);
 	update_uniform('nb', 300);

@@ -6,8 +6,8 @@
 
 var circleVertexShader = `#version 300 es
 
+uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
-uniform vec2 PC[4];
 uniform int nb;
 
 void main()
@@ -17,7 +17,7 @@ void main()
 	gl_PointSize = 2.0;
 	float a = deg*float(gl_VertexID) / float(nb);
 
-  gl_Position = viewMatrix * vec4(sin(a) * 3.0, cos(a) * 3.0, 0, 1);
+  gl_Position = projectionMatrix * viewMatrix * vec4(sin(a) * 3.0, cos(a) * 3.0, 0, 1);
 }
 
 `;
