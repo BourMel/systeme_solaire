@@ -23,10 +23,12 @@ let precision = 200;
 
 function init_wgl()
 {
-  // drawUserInterface();
+  drawUserInterface();
 
 	// start timer
-	ewgl_continuous_update = true;
+	if(!PAUSE_MODE) {
+		ewgl_continuous_update = true;
+	}
 
 	// PROGRAMS
 	simple_program = ShaderProgram(simpleVertexShader, simpleFragmentShader, 'simple_program');
@@ -72,6 +74,12 @@ function init_wgl()
 
 function draw_wgl()
 {
+	if(PAUSE_MODE) {
+		ewgl_current_time = 0;
+	} else {
+		ewgl_current_time += time_slider.value*0.01;
+	}
+
 	gl.clearColor(0, 0, 0, 1);
 	gl.enable(gl.DEPTH_TEST);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -86,16 +94,17 @@ function draw_wgl()
 	let saturn_size = 0.5;
 	let uranus_size = 0.4;
 	let neptune_size = 0.3;
+
 	// all distances to the reference (most often : the sun)
-	let mercury_distance = 8;
-	let venus_distance = 7;
-	let earth_distance = 13;
-	let moon_distance = 5; // reference = earth
-	let mars_distance = 20;
-	let jupiter_distance = 10;
-	let saturn_distance = 15;
-	let uranus_distance = 17;
-	let neptune_distance = 30;
+	let mercury_distance = 8*DISTANCE;
+	let venus_distance = 7*DISTANCE;
+	let earth_distance = 13*DISTANCE;
+	let moon_distance = 5*DISTANCE; // reference = earth
+	let mars_distance = 20*DISTANCE;
+	let jupiter_distance = 10*DISTANCE;
+	let saturn_distance = 15*DISTANCE;
+	let uranus_distance = 17*DISTANCE;
+	let neptune_distance = 30*DISTANCE;
 
   // les matrices sont deduites de la camera
   const projection_matrix = scene_camera.get_projection_matrix();
@@ -251,11 +260,6 @@ function draw_wgl()
 	update_uniform('radius', venus_size + earth_distance*earth_size - earth_size/2);
 	gl.drawArrays(gl.LINE_LOOP, 0, 300);
 
-	// MOON
-	// update_uniform('viewMatrix', earth_view_matrix);
-	// update_uniform('radius', 1.0 + moon_distance*moon_size - moon_size/2);
-	// gl.drawArrays(gl.LINE_LOOP, 0, 300);
-
 	// MARS
 	update_uniform('radius', earth_size + mars_distance*mars_size - mars_size/2);
 	gl.drawArrays(gl.LINE_LOOP, 0, 300);
@@ -274,6 +278,11 @@ function draw_wgl()
 
 	// NEPTUNE
 	update_uniform('radius', uranus_size + neptune_distance*neptune_size - neptune_size/2);
+	gl.drawArrays(gl.LINE_LOOP, 0, 300);
+
+	// MOON (last since other view_matrix)
+	update_uniform('viewMatrix', earth_view_matrix);
+	update_uniform('radius', 1.0 + moon_distance*moon_size - moon_size/2);
 	gl.drawArrays(gl.LINE_LOOP, 0, 300);
 }
 
