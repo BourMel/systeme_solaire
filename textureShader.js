@@ -4,7 +4,7 @@
 
 /** VERTEX SHADER **/
 
-var simpleVertexShader = `#version 300 es
+var textureVertexShader = `#version 300 es
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -29,10 +29,10 @@ void main()
 
 /** FRAGMENT SHADER **/
 
-var simpleFragmentShader = `#version 300 es
+var textureFragmentShader = `#version 300 es
 precision highp float;
 
-uniform sampler2D uSampler;
+uniform sampler2D TU0;
 
 in vec3 Col;
 in highp vec2 v_texture_coord;
@@ -41,7 +41,7 @@ out vec4 frag_out;
 
 void main()
 {
-	vec4 text_color = texture(uSampler, v_texture_coord);
+	vec4 text_color = texture(TU0, v_texture_coord);
 	frag_out = text_color;
 }
 
