@@ -153,6 +153,7 @@ function draw_wgl()
   double_texture_program.bind();
   update_uniform('viewMatrix', earth_view_matrix);
   update_uniform('projectionMatrix', projection_matrix);
+  update_uniform('time', ewgl_current_time/6);
 
   earth_infos["texture"].bind(0, 'TU0');
   earth_infos["clouds"].bind(1, 'TU1');

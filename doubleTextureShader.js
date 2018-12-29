@@ -33,14 +33,20 @@ precision highp float;
 uniform sampler2D TU0;
 uniform sampler2D TU1;
 
+uniform float time;
 in highp vec2 v_texture_coord;
 
 out vec4 frag_out;
 
 void main()
 {
+	vec2 moving_text = vec2(
+		mod(v_texture_coord.x + time, 1.0),
+		v_texture_coord.y
+	);
+
   vec3 text1 = texture(TU0, v_texture_coord).rgb;
-	vec3 text2 = texture(TU1, v_texture_coord).rgb;
+	vec3 text2 = texture(TU1, moving_text).rgb;
 
 	frag_out = vec4(mix(text1, text2, 0.2), 1.0);
 }
