@@ -16,7 +16,9 @@ function init_wgl()
 	// PROGRAMS
 	texture_program = ShaderProgram(textureVertexShader, textureFragmentShader, 'texture_program');
 	circle_program = ShaderProgram(circleVertexShader, circleFragmentShader, 'circle_program');
+	y_circle_program = ShaderProgram(circleYVertexShader, circleFragmentShader, 'y_circle_program');
 	double_texture_program = ShaderProgram(doubleTextureVertexShader, doubleTextureFragmentShader, 'double_texture_program');
+	rings_program = ShaderProgram(ringsVertexShader, ringsFragmentShader, 'rings_program');
 
 	// solar system
 	let sun = Mesh.Sphere(SPHERE_PRECISION);
@@ -38,7 +40,9 @@ function init_wgl()
 	jupiter_infos = init_texture(jupiter, "jupiter");
 
 	let saturn = Mesh.Sphere(SPHERE_PRECISION);
+  let saturn_rings = Mesh.Grid(100);
 	saturn_infos = init_texture(saturn, "saturn");
+  saturn_infos["rings_renderer"] = saturn_rings.renderer(true, false, true);
 
 	let uranus = Mesh.Sphere(SPHERE_PRECISION);
 	uranus_infos = init_texture(uranus, "uranus");
@@ -47,7 +51,7 @@ function init_wgl()
 	neptune_infos = init_texture(neptune, "neptune");
 
   // double texturing earth
-  let earth = Mesh.Sphere(SPHERE_PRECISION);
+  earth = Mesh.Sphere(SPHERE_PRECISION);
   earth_infos = {
     "texture": Texture2d(),
     "clouds": Texture2d(
@@ -212,10 +216,29 @@ function draw_wgl()
 	update_uniform('radius', uranus_size + neptune_distance*neptune_size - neptune_size/2);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
-	// MOON (last since other view_matrix)
+  // MOON
+  y_circle_program.bind();
+  update_uniform('projectionMatrix', projection_matrix);
+  update_uniform('viewMatrix', solar_system);
+  update_uniform('y_position', moon_size/2);
+  update_uniform('color', 255, 255, 255);
+  update_uniform('nb', ELLIPSE_PRECISION);
 	update_uniform('viewMatrix', earth_view_matrix);
-	update_uniform('radius', 1.0 + moon_distance*moon_size - moon_size/2);
+	update_uniform('radius', moon_distance*moon_size);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+
+  /**************/
+  /**DRAW RINGS**/
+  /**************/
+  rings_program.bind();
+  update_uniform('viewMatrix', saturn_view_matrix);
+  update_uniform('projectionMatrix', projection_matrix);
+
+  saturn_infos["texture"].bind(0);
+  saturn_infos["rings_renderer"].draw(gl.TRIANGLES);
+
+  unbind_shader();
+  unbind_texture2d();
 }
 
 /*****************************/

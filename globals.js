@@ -6,7 +6,12 @@ let ELLIPSE_PRECISION = 300;
 // PROGRAMS
 var texture_program = null;
 var double_texture_program = null;
+var y_circle_program = null;
 var circle_program = null;
+var rings_program = null;
+
+// PLANETS
+let earth = null;
 
 // TEXTURES AND RENDERERS
 let sun_infos = null;
