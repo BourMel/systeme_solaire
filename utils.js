@@ -74,7 +74,6 @@ function set_planets_positions(solar_system) {
 		rotateZ(190 + 0.7*ewgl_current_time),
 		scale(mars_size),
 		translate(mars_distance, 1, mars_size/2),
-		rotateX(3*ewgl_current_time),
 		rotateZ(33*ewgl_current_time)
 	);
 
@@ -99,7 +98,7 @@ function set_planets_positions(solar_system) {
 		rotateZ(67 + 2.1*ewgl_current_time),
 		scale(uranus_size),
 		translate(uranus_distance, 1, uranus_size/2),
-		rotateX(18*ewgl_current_time)
+		rotateX(-18*ewgl_current_time)
 	);
 
 	neptune_view_matrix = mmult(
@@ -107,7 +106,7 @@ function set_planets_positions(solar_system) {
 		rotateZ(46 + 1.3*ewgl_current_time),
 		scale(neptune_size),
 		translate(neptune_distance, 1, neptune_size/2),
-		rotateX(21*ewgl_current_time)
+		rotateZ(21*ewgl_current_time)
 	);
 }
 
@@ -116,6 +115,8 @@ function set_planets_positions(solar_system) {
  **/
 
 function drawSaturnRings() {
+  update_uniform('viewMatrix', saturn_view_matrix);
+
   // inside circle
   update_uniform('color', 0.6, 0.5, 0.3);
   for(let i=0; i<8; i++) {
@@ -143,4 +144,28 @@ function drawSaturnRings() {
     update_uniform('radius', 1.85 + i*0.02);
     gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
   }
+}
+
+
+/**
+ * Draw uranus rings
+ **/
+
+function drawUranusRings() {
+  update_uniform('viewMatrix', uranus_view_matrix);
+
+  // inside circle
+  update_uniform('color', 0.6, 0.7, 0.7);
+  for(let i=0; i<4; i++) {
+    update_uniform('radius', 1.5 + i*0.01);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+
+  // middle
+  update_uniform('color', 0.65, 0.65, 0.7);
+  for(let i=0; i<3; i++) {
+    update_uniform('radius', 1.7 + i*0.13);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+
 }

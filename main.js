@@ -234,11 +234,11 @@ function draw_wgl()
   /**DRAW RINGS**/
   /**************/
   rings_program.bind();
-  update_uniform('viewMatrix', saturn_view_matrix);
   update_uniform('projectionMatrix', projection_matrix);
   update_uniform('nb', ELLIPSE_PRECISION);
 
   drawSaturnRings();
+  drawUranusRings();
 
   unbind_shader();
   unbind_texture2d();
