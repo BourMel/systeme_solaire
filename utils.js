@@ -14,6 +14,21 @@ function init_texture(mesh, file_name) {
 }
 
 /**
+ * Since DISTANCE can change value, changes all the planets distances
+ */
+function update_distances() {
+  mercury_distance = 8*DISTANCE;
+  venus_distance = 7*DISTANCE;
+  earth_distance = 13*DISTANCE;
+  moon_distance = 5*DISTANCE; // reference = earth
+  mars_distance = 20*DISTANCE;
+  jupiter_distance = 10*DISTANCE;
+  saturn_distance = 15*DISTANCE;
+  uranus_distance = 17*DISTANCE;
+  neptune_distance = 30*DISTANCE;
+}
+
+/**
  * set all planets' positions according to timer
  * called in draw_wgl
  * ARGS :

@@ -50,12 +50,12 @@ let uranus_size = 0.4;
 let neptune_size = 0.3;
 
 // PLANETS' DISTANCES to their reference (most often : the sun)
-let mercury_distance = 8*DISTANCE;
-let venus_distance = 7*DISTANCE;
-let earth_distance = 13*DISTANCE;
-let moon_distance = 5*DISTANCE; // reference = earth
-let mars_distance = 20*DISTANCE;
-let jupiter_distance = 10*DISTANCE;
-let saturn_distance = 15*DISTANCE;
-let uranus_distance = 17*DISTANCE;
-let neptune_distance = 30*DISTANCE;
+let mercury_distance = null;
+let venus_distance = null;
+let earth_distance = null;
+let moon_distance = null;
+let mars_distance = null;
+let jupiter_distance = null;
+let saturn_distance = null;
+let uranus_distance = null;
+let neptune_distance = null;

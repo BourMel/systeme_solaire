@@ -20,6 +20,9 @@ function init_wgl()
 	double_texture_program = ShaderProgram(doubleTextureVertexShader, doubleTextureFragmentShader, 'double_texture_program');
 	rings_program = ShaderProgram(ringsVertexShader, ringsFragmentShader, 'rings_program');
 
+  // get all planets distances
+  update_distances();
+
 	// solar system
 	let sun = Mesh.Sphere(SPHERE_PRECISION);
 	sun_infos = init_texture(sun, "sun");
