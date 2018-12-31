@@ -95,3 +95,37 @@ function set_planets_positions(solar_system) {
 		rotateX(21*ewgl_current_time)
 	);
 }
+
+/**
+ * Draw saturn rings
+ **/
+
+function drawSaturnRings() {
+  // inside circle
+  update_uniform('color', 0.6, 0.5, 0.3);
+  for(let i=0; i<8; i++) {
+    update_uniform('radius', 1.1 + i*0.01);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+
+  update_uniform('color', 0.7, 0.6, 0.4);
+  for(let i=0; i<20; i++) {
+    update_uniform('radius', 1.2 + i*0.01);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+
+  // next circle
+  update_uniform('color', 0.8, 0.7, 0.6);
+  for(let i=0; i<40; i++) {
+    update_uniform('color', 0.7 + i*0.005, 0.6 + i*0.005, 0.4  + i*0.005);
+    update_uniform('radius', 1.4 + i*0.01);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+
+  // outside circle
+  for(let i=0; i<20; i++) {
+    update_uniform('color', 0.85, 0.75, 0.65 - i*0.01);
+    update_uniform('radius', 1.85 + i*0.02);
+    gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  }
+}

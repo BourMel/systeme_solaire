@@ -233,9 +233,9 @@ function draw_wgl()
   rings_program.bind();
   update_uniform('viewMatrix', saturn_view_matrix);
   update_uniform('projectionMatrix', projection_matrix);
+  update_uniform('nb', ELLIPSE_PRECISION);
 
-  saturn_infos["texture"].bind(0);
-  saturn_infos["rings_renderer"].draw(gl.TRIANGLES);
+  drawSaturnRings();
 
   unbind_shader();
   unbind_texture2d();
