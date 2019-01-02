@@ -5,6 +5,9 @@ document.addEventListener('keypress', function (e) {
       case 112: // P
         PAUSE_MODE = !PAUSE_MODE;
         break;
+      case 105: // I
+        INFO_MODE = !INFO_MODE;
+        break;
 
       case 43: // +
         if(DISTANCE < 1) {
