@@ -7,6 +7,9 @@
 function init_wgl()
 {
   drawUserInterface();
+  if(INFO_MODE) {
+    displayInformations();
+  }
 
 	// start timer
 	if(!PAUSE_MODE) {
@@ -14,6 +17,7 @@ function init_wgl()
 	}
 
 	// PROGRAMS
+	text_program = ShaderProgram(textVertexShader, textFragmentShader, 'text_program');
 	texture_program = ShaderProgram(textureVertexShader, textureFragmentShader, 'texture_program');
 	circle_program = ShaderProgram(circleVertexShader, circleFragmentShader, 'circle_program');
 	y_circle_program = ShaderProgram(circleYVertexShader, circleFragmentShader, 'y_circle_program');
@@ -66,6 +70,7 @@ function init_wgl()
   Promise.all([earth_infos["texture"].load("./images/earth.jpg"),
 	             earth_infos["clouds"].load("./images/earth_clouds.jpg")]).then( update_wgl );
 
+ // scene_camera.set_scene_radius(sun.BB.radius);
 	scene_camera.show_scene(sun.BB);
 }
 
@@ -94,9 +99,14 @@ function draw_wgl()
   /*************/
 
 	// set the scale for the entire view
-	let solar_system = mmult(view_matrix, scale(0.1));
+	solar_system = mmult(view_matrix, scale(0.1));
   // set all planets positions
 	set_planets_positions(solar_system);
+
+  // add information text
+  if(INFO_MODE) {
+    updateInformations(view_matrix, projection_matrix);
+  }
 
   /****************/
   /**DRAW PLANETS**/

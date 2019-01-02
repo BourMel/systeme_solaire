@@ -1,9 +1,13 @@
+// @TODO: options/controls in user interface
+
 var PAUSE_MODE = false;
+var INFO_MODE = true;
 var DISTANCE = 1;
 let SPHERE_PRECISION = 200;
 let ELLIPSE_PRECISION = 300;
 
 // PROGRAMS
+var text_program = null;
 var texture_program = null;
 var double_texture_program = null;
 var y_circle_program = null;
@@ -27,6 +31,7 @@ let neptune_infos = null;
 
 // PLANETS POSITIONS
 
+let solar_system = null;
 let sun_view_matrix = null;
 let mercury_view_matrix = null;
 let venus_view_matrix = null;
@@ -59,3 +64,41 @@ let jupiter_distance = null;
 let saturn_distance = null;
 let uranus_distance = null;
 let neptune_distance = null;
+
+// OBJECT TEXTS AND RENDERERS/TEXTURES
+
+// text objects
+var sun_text = null;
+var mercury_text = null;
+var venus_text = null;
+var earth_text = null;
+let moon_text = null;
+let mars_text = null;
+let jupiter_text = null;
+let saturn_text = null;
+let uranus_text = null;
+let neptune_text = null;
+
+// renderers
+let sun_text_r = null;
+var mercury_text_r = null;
+var venus_text_r = null;
+var earth_text_r = null;
+let moon_text_r = null;
+let mars_text_r = null;
+let jupiter_text_r = null;
+let saturn_text_r = null;
+let uranus_text_r = null;
+let neptune_text_r = null;
+
+// textures
+let sun_text_t = null;
+var mercury_text_t = null;
+var venus_text_t = null;
+var earth_text_t = null;
+let moon_text_t = null;
+let mars_text_t = null;
+let jupiter_text_t = null;
+let saturn_text_t = null;
+let uranus_text_t = null;
+let neptune_text_t = null;
