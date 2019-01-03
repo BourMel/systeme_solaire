@@ -18,6 +18,7 @@ var rings_program = null;
 let earth = null;
 
 // TEXTURES AND RENDERERS
+let stars_infos = null;
 let sun_infos = null;
 let mercury_infos = null;
 let venus_infos = null;
@@ -32,6 +33,7 @@ let neptune_infos = null;
 // PLANETS POSITIONS
 
 let solar_system = null;
+let stars_view_matrix = null;
 let sun_view_matrix = null;
 let mercury_view_matrix = null;
 let venus_view_matrix = null;

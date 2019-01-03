@@ -37,6 +37,11 @@ function update_distances() {
 function set_planets_positions(solar_system) {
   sun_view_matrix = solar_system;
 
+  stars_view_matrix = mmult(
+		solar_system,
+		scale(300)
+	);
+
 	mercury_view_matrix = mmult(
 		solar_system,
 		rotateZ(10*ewgl_current_time), // rotation around the sun : const (where to start) + speed

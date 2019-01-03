@@ -27,6 +27,9 @@ function init_wgl()
   // get all planets distances
   update_distances();
 
+  let stars = Mesh.Sphere(SPHERE_PRECISION);
+  stars_infos = init_texture(stars, "stars");
+
 	// solar system
 	let sun = Mesh.Sphere(SPHERE_PRECISION);
 	sun_infos = init_texture(sun, "sun");
@@ -70,8 +73,7 @@ function init_wgl()
   Promise.all([earth_infos["texture"].load("./images/earth.jpg"),
 	             earth_infos["clouds"].load("./images/earth_clouds.jpg")]).then( update_wgl );
 
- // scene_camera.set_scene_radius(sun.BB.radius);
-	scene_camera.show_scene(sun.BB);
+ scene_camera.set_scene_radius(40);
 }
 
 /*****************************/
@@ -112,11 +114,16 @@ function draw_wgl()
   /**DRAW PLANETS**/
   /****************/
 
-	// SUN
 	texture_program.bind();
 	update_uniform('projectionMatrix', projection_matrix);
 
-	update_uniform('viewMatrix', sun_view_matrix);
+  // STARS
+	update_uniform('viewMatrix', stars_view_matrix);
+	stars_infos["texture"].bind(0);
+	stars_infos["renderer"].draw(gl.TRIANGLES);
+
+  // SUN
+  update_uniform('viewMatrix', sun_view_matrix);
 	sun_infos["texture"].bind(0);
 	sun_infos["renderer"].draw(gl.TRIANGLES);
 
