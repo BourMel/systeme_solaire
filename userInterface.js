@@ -1,14 +1,26 @@
 /** DRAW USER INTERFACE **/
 
-var time_slider;
-var text_initialised = false;
-
 function drawUserInterface() {
   UserInterface.begin();
-  UserInterface.use_field_set('T', "Settings");
 
   time_slider = UserInterface.add_slider('Adjust Time', 0, 20, 1, update_wgl);
-  UserInterface.end_use();
+  UserInterface.add_br();
+
+  UserInterface.add_label("Toggle with 'I' key");
+  info_checkbox = UserInterface.add_check_box('Display infos', INFO_MODE, () => {
+		INFO_MODE = !INFO_MODE;
+	});
+  UserInterface.add_br();
+
+  UserInterface.add_label("Toggle with 'P' key");
+  pause_checkbox = UserInterface.add_check_box('Pause', PAUSE_MODE, () => {
+		PAUSE_MODE = !PAUSE_MODE;
+	});
+
+  let distances = document.createElement("p");
+  distances.style.whiteSpace = "normal";
+  distances.innerHTML = "To change planets' distances, use '+' and '-' keys";
+  UserInterface.par[0].append(distances);
 }
 
 /**

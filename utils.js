@@ -35,7 +35,10 @@ function update_distances() {
  * solar_system = solar_system view matrix
  */
 function set_planets_positions(solar_system) {
-  sun_view_matrix = solar_system;
+  sun_view_matrix = mmult(
+    solar_system,
+    rotateZ(7*ewgl_current_time)
+  );
 
   stars_view_matrix = mmult(
 		solar_system,

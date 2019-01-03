@@ -4,13 +4,15 @@ document.addEventListener('keypress', function (e) {
     switch(key) {
       case 112: // P
         PAUSE_MODE = !PAUSE_MODE;
+        pause_checkbox.checked = PAUSE_MODE;
         break;
       case 105: // I
         INFO_MODE = !INFO_MODE;
+        info_checkbox.checked = INFO_MODE;
         break;
 
       case 43: // +
-        if(DISTANCE < 1) {
+        if(DISTANCE < 10) {
           DISTANCE += 0.01;
           update_distances();
           draw_wgl();

@@ -104,3 +104,10 @@ let jupiter_text_t = null;
 let saturn_text_t = null;
 let uranus_text_t = null;
 let neptune_text_t = null;
+
+// USER INTERFACE
+let text_initialised = false;
+//html
+let time_slider;
+let info_checkbox;
+let pause_checkbox;

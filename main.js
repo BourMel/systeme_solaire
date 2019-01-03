@@ -70,8 +70,10 @@ function init_wgl()
     ),
     "renderer": earth.renderer(true, true, true)
   }
-  Promise.all([earth_infos["texture"].load("./images/earth.jpg"),
-	             earth_infos["clouds"].load("./images/earth_clouds.jpg")]).then( update_wgl );
+  Promise.all([
+    earth_infos["texture"].load("./images/earth.jpg"),
+    earth_infos["clouds"].load("./images/earth_clouds.jpg")
+  ]).then( update_wgl );
 
  scene_camera.set_scene_radius(40);
 }
