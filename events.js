@@ -19,7 +19,7 @@ document.addEventListener('keypress', function (e) {
         }
         break;
       case 45: // -
-        if(DISTANCE > 0.08) {
+        if(DISTANCE > 0.2) {
           DISTANCE -= 0.01;
           update_distances();
           draw_wgl();

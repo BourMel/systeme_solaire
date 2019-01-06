@@ -144,7 +144,7 @@ function updateInformations(view_matrix, projection_matrix) {
     solar_system,
     rotateZ(190 + 0.7*ewgl_current_time),
 		translate(sun_size + mars_distance, 0, 0), // same as mars
-    translate(0, 0, 2),
+    translate(0, 0, 1.5),
     rotateX(90),
     scale(mars_size),
   ));
@@ -168,10 +168,9 @@ function updateInformations(view_matrix, projection_matrix) {
   // SATURN
 	update_uniform('viewMatrix', mmult(
     solar_system,
-		rotateZ(220 + 1.5*ewgl_current_time),
-		scale(saturn_size),
-		translate(saturn_distance, 1, saturn_size/2), // same as saturn
-    translate(0, 1, 1.5),
+    rotateZ(220 + 1.5*ewgl_current_time),
+		translate(sun_size + saturn_distance, 0, 0), // same as saturn
+    translate(0, 0, 2),
     rotateX(90),
     scale(0.6)
   ));
@@ -183,11 +182,10 @@ function updateInformations(view_matrix, projection_matrix) {
 	update_uniform('viewMatrix', mmult(
     solar_system,
 		rotateZ(67 + 2.1*ewgl_current_time),
-		scale(uranus_size),
-		translate(uranus_distance, 1, uranus_size/2), // same as uranus
-    translate(0, 1, 1.5),
+		translate(sun_size + uranus_distance, 0, 0), // same as uranus
+    translate(0, 0, 2.5),
     rotateX(90),
-    scale(0.6)
+    scale(uranus_size)
   ));
 
 	uranus_text_t.bind(0);
@@ -197,10 +195,10 @@ function updateInformations(view_matrix, projection_matrix) {
 	update_uniform('viewMatrix', mmult(
     solar_system,
 		rotateZ(46 + 1.3*ewgl_current_time),
-		scale(neptune_size),
-		translate(neptune_distance, 1, neptune_size/2), // same as neptune
-    translate(0, 1, 1.5),
-    rotateX(90)
+		translate(sun_size + neptune_distance, 0, 0), // same as neptune
+    translate(0, 0, 2),
+    rotateX(90),
+    scale(neptune_size * 0.8),
   ));
 
 	neptune_text_t.bind(0);

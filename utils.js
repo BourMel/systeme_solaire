@@ -24,8 +24,8 @@ function update_distances() {
   mars_distance = 40*DISTANCE; // 249 000 000 km
   jupiter_distance = 55*DISTANCE; // 778 000 000 km
   saturn_distance = 70*DISTANCE; // 1 427 000 000 km
-  uranus_distance = 17*DISTANCE;
-  neptune_distance = 30*DISTANCE;
+  uranus_distance = 90*DISTANCE; // 2 869 000 000 km
+  neptune_distance = 120*DISTANCE; // 4 497 000 000 km
 }
 
 /**
@@ -65,9 +65,8 @@ function set_planets_positions(solar_system) {
 
 	moon_view_matrix = mmult(
 		earth_view_matrix, // set earth as reference
-		rotateY(20*ewgl_current_time), // rotation around the earth
-		scale(moon_size),
-		translate(moon_distance, 1, moon_size/2),
+		rotateY(10*ewgl_current_time), // rotation around the earth
+		translate(earth_size + moon_distance, 0, 0),
 		rotateY(42*ewgl_current_time)
 	);
 
@@ -95,16 +94,14 @@ function set_planets_positions(solar_system) {
 	uranus_view_matrix = mmult(
 		solar_system,
 		rotateZ(67 + 2.1*ewgl_current_time),
-		scale(uranus_size),
-		translate(uranus_distance, 1, uranus_size/2),
+		translate(sun_size + uranus_distance, 0, 0),
 		rotateX(-18*ewgl_current_time)
 	);
 
 	neptune_view_matrix = mmult(
 		solar_system,
 		rotateZ(46 + 1.3*ewgl_current_time),
-		scale(neptune_size),
-		translate(neptune_distance, 1, neptune_size/2),
+		translate(sun_size + neptune_distance, 0, 0),
 		rotateZ(21*ewgl_current_time)
 	);
 }

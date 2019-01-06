@@ -45,22 +45,23 @@ let saturn_view_matrix = null;
 let uranus_view_matrix = null;
 let neptune_view_matrix = null;
 
-// PLANETS' SIZES (reference is most often the sun)
-let stars_size = 300;
+// PLANETS' SIZES
+let stars_size = 600;
 let sun_size = 3; // 700 000
 // Next sizes will be divided by 7000
 let mercury_size = 0.348; // 2 439 km
 let venus_size = 0.865; // 6 051
 let earth_size = 0.910; // 6 371
-let moon_size = 0.3; // reference = earth
+let moon_size = 0.246; // 0.27 * earth
 let mars_size = 0.484; // 3 389km
 // Next sizes will be divided by 35 000
 let jupiter_size = 1.910; // 66 864 km
 let saturn_size = 1.553; // 54 359 km
-let uranus_size = 0.4;
-let neptune_size = 0.3;
+// Next sizes will be divided by 20 000 km
+let uranus_size = 1.268; // 25 362
+let neptune_size = 1.217; // 24 341
 
-// PLANETS' DISTANCES to their reference (most often : the sun)
+// PLANETS' DISTANCES to their reference (the sun, except for the moon)
 let mercury_distance = null;
 let venus_distance = null;
 let earth_distance = null;
