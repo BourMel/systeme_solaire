@@ -25,6 +25,10 @@ document.addEventListener('keypress', function (e) {
           draw_wgl();
         }
         break;
+      case 32: // space
+        FOCUS = (FOCUS+1)%FOCUS_LIST.length;
+        focus.innerHTML = FOCUS_LIST[FOCUS];
+        break;
       default:
         console.log(key);
         break;

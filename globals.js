@@ -5,6 +5,11 @@ var INFO_MODE = true;
 var DISTANCE = 0.5;
 let SPHERE_PRECISION = 200;
 let ELLIPSE_PRECISION = 300;
+let FOCUS = 0;
+let FOCUS_LIST = [
+  "sun", "mercury", "venus", "earth",
+  "mars", "jupiter", "saturn", "uranus", "neptune"
+];
 
 // PROGRAMS
 var text_program = null;
@@ -113,6 +118,7 @@ let neptune_text_t = null;
 // USER INTERFACE
 let text_initialised = false;
 //html
+let focus;
 let time_slider;
 let info_checkbox;
 let pause_checkbox;

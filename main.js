@@ -112,6 +112,8 @@ function draw_wgl()
     updateInformations(view_matrix, projection_matrix);
   }
 
+  choose_camera_focus();
+
   /****************/
   /**DRAW PLANETS**/
   /****************/

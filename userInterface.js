@@ -20,6 +20,12 @@ function drawUserInterface() {
   let distances = document.createElement("p");
   distances.style.whiteSpace = "normal";
   distances.innerHTML = "To change planets' distances, use '+' and '-' keys";
+  distances.innerHTML += "<br/>Change focus with 'space' key. Current focus is : ";
+
+  focus = document.createElement("b");
+  focus.innerHTML = FOCUS_LIST[FOCUS];
+
+  distances.append(focus);
   UserInterface.par[0].append(distances);
 }
 

@@ -107,6 +107,77 @@ function set_planets_positions(solar_system) {
 }
 
 /**
+ * set camera center according to FOCUS value
+ * called in draw_wgl
+ * all matrix values come from the planets matrix
+ */
+function choose_camera_focus() {
+  let focus = null;
+
+  switch(FOCUS_LIST[FOCUS]) {
+    case "sun":
+      focus = mmult(
+        translate(0, 0, 0)
+      );
+      break;
+    case "mercury":
+      focus = mmult(
+        rotateZ(5*ewgl_current_time),
+        translate(sun_size + mercury_distance, 0, 0)
+      );
+      break;
+    case "venus":
+      focus = mmult(
+        rotateZ(80 + 6*ewgl_current_time),
+        translate(sun_size + venus_distance, 0, 0)
+      );
+      break;
+    case "earth":
+      focus = mmult(
+        rotateZ(60 + 5*ewgl_current_time),
+    		translate(sun_size + earth_distance, 0, 0)
+      );
+      break;
+    case "mars":
+      focus = mmult(
+        rotateZ(190 + 0.7*ewgl_current_time),
+    		translate(sun_size + mars_distance, 0, 0),
+      );
+      break;
+    case "jupiter":
+      focus = mmult(
+        rotateZ(250 + 3*ewgl_current_time),
+    		translate(sun_size + jupiter_distance, 0, 0),
+      );
+      break;
+    case "saturn":
+      focus = mmult(
+        rotateZ(220 + 1.5*ewgl_current_time),
+        translate(sun_size + saturn_distance, 0, 0),
+      );
+      break;
+    case "uranus":
+      focus = mmult(
+        rotateZ(67 + 2.1*ewgl_current_time),
+        translate(sun_size + uranus_distance, 0, 0),
+      );
+      break;
+    case "neptune":
+      focus = mmult(
+        rotateZ(46 + 1.3*ewgl_current_time),
+        translate(sun_size + neptune_distance, 0, 0),
+      );
+      break;
+    }
+
+    if(focus != null) {
+      scene_camera.set_scene_center(
+        focus.vecmult(Vec4(0, 0, 0, 1))
+      );
+    }
+}
+
+/**
  * Draw saturn rings
  **/
 
