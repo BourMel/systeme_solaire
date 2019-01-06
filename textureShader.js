@@ -18,7 +18,12 @@ out vec2 v_texture_coord;
 
 void main()
 {
-	vec4 P4 = viewMatrix * vec4(position_in, 1);
+	vec4 P4 = viewMatrix * vec4(
+		position_in.x,
+		- position_in.y,
+		position_in.z,
+		1
+	);
 
 	gl_Position = projectionMatrix * P4;
 

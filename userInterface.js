@@ -103,11 +103,11 @@ function updateInformations(view_matrix, projection_matrix) {
   // MERCURY
   update_uniform('viewMatrix', mmult(
     solar_system,
-		rotateZ(10*ewgl_current_time),
-		scale(mercury_size),
-		translate(mercury_distance, 1, mercury_size/2), // same as mercury, except its rotation
-    translate(0, 1, 2),
-    rotateX(90)
+    rotateZ(5*ewgl_current_time),
+    translate(sun_size + mercury_distance, 0, 0), // same as mercury, except its rotation
+    translate(0, 0, 2),
+    rotateX(90),
+    scale(mercury_size * 2)
   ));
 
 	mercury_text_t.bind(0);
@@ -116,11 +116,11 @@ function updateInformations(view_matrix, projection_matrix) {
   // VENUS
   update_uniform('viewMatrix', mmult(
     solar_system,
-    rotateZ(80 + 9*ewgl_current_time),
+    rotateZ(80 + 6*ewgl_current_time),
+		translate(sun_size + venus_distance, 0, 0), // same as venus
+    translate(0, 0, 2),
+    rotateX(90),
     scale(venus_size),
-    translate(venus_distance, 1, venus_size/2), // same as venus
-    translate(0, 1, 2),
-    rotateX(90)
   ));
 
 	venus_text_t.bind(0);
@@ -130,10 +130,10 @@ function updateInformations(view_matrix, projection_matrix) {
 	update_uniform('viewMatrix', mmult(
     solar_system,
     rotateZ(60 + 5*ewgl_current_time),
-		scale(earth_size),
-		translate(earth_distance, 1, earth_size/2), // same as earth
-    translate(0, 1, 2),
-    rotateX(90)
+		translate(sun_size + earth_distance, 0, 0), // same as earth
+    translate(0, 0, 2),
+    rotateX(90),
+    scale(earth_size),
   ));
 
 	earth_text_t.bind(0);
@@ -142,11 +142,11 @@ function updateInformations(view_matrix, projection_matrix) {
   // MARS
 	update_uniform('viewMatrix', mmult(
     solar_system,
-		rotateZ(190 + 0.7*ewgl_current_time),
-		scale(mars_size),
-		translate(mars_distance, 1, mars_size/2), // same as mars
-    translate(0, 1, 2),
-    rotateX(90)
+    rotateZ(190 + 0.7*ewgl_current_time),
+		translate(sun_size + mars_distance, 0, 0), // same as mars
+    translate(0, 0, 2),
+    rotateX(90),
+    scale(mars_size),
   ));
 
 	mars_text_t.bind(0);
@@ -156,11 +156,10 @@ function updateInformations(view_matrix, projection_matrix) {
 	update_uniform('viewMatrix', mmult(
     solar_system,
 		rotateZ(250 + 3*ewgl_current_time),
-		scale(jupiter_size),
-		translate(jupiter_distance, 1, jupiter_size/2), // same as jupiter
-    translate(0, 1, 1.5),
+		translate(sun_size + jupiter_distance, 0, 0), // same as jupiter
+    translate(0, 0, 4),
     rotateX(90),
-    scale(0.6)
+    scale(jupiter_size * 0.7)
   ));
 
 	jupiter_text_t.bind(0);

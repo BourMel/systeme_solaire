@@ -75,7 +75,7 @@ function init_wgl()
     earth_infos["clouds"].load("./images/earth_clouds.jpg")
   ]).then( update_wgl );
 
- scene_camera.set_scene_radius(40);
+ scene_camera.set_scene_radius(400);
 }
 
 /*****************************/
@@ -103,7 +103,7 @@ function draw_wgl()
   /*************/
 
 	// set the scale for the entire view
-	solar_system = mmult(view_matrix, scale(0.1));
+	solar_system = mmult(view_matrix);
   // set all planets positions
 	set_planets_positions(solar_system);
 
@@ -120,64 +120,64 @@ function draw_wgl()
 	update_uniform('projectionMatrix', projection_matrix);
 
   // STARS
-	update_uniform('viewMatrix', stars_view_matrix);
+	update_uniform('viewMatrix', mmult(stars_view_matrix, scale(stars_size)));
 	stars_infos["texture"].bind(0);
 	stars_infos["renderer"].draw(gl.TRIANGLES);
 
   // SUN
-  update_uniform('viewMatrix', sun_view_matrix);
+  update_uniform('viewMatrix', mmult(sun_view_matrix, scale(sun_size)));
 	sun_infos["texture"].bind(0);
 	sun_infos["renderer"].draw(gl.TRIANGLES);
 
 	// MERCURY
-	update_uniform('viewMatrix', mercury_view_matrix);
+	update_uniform('viewMatrix', mmult(mercury_view_matrix, scale(mercury_size)));
 	mercury_infos["texture"].bind(0);
 	mercury_infos["renderer"].draw(gl.TRIANGLES);
 
 	// VENUS
-	update_uniform('viewMatrix', venus_view_matrix);
+	update_uniform('viewMatrix', mmult(venus_view_matrix, scale(venus_size)));
 	venus_infos["texture"].bind(0);
 	venus_infos["renderer"].draw(gl.TRIANGLES);
 
-	// MOON
-	update_uniform('viewMatrix', moon_view_matrix);
-	moon_infos["texture"].bind(0);
-	moon_infos["renderer"].draw(gl.TRIANGLES);
-
+	// // MOON
+	// update_uniform('viewMatrix', moon_view_matrix);
+	// moon_infos["texture"].bind(0);
+	// moon_infos["renderer"].draw(gl.TRIANGLES);
+  //
 	// MARS
-	update_uniform('viewMatrix', mars_view_matrix);
+	update_uniform('viewMatrix', mmult(mars_view_matrix, scale(mars_size)));
 	mars_infos["texture"].bind(0);
 	mars_infos["renderer"].draw(gl.TRIANGLES);
 
 	// JUPITER
-	update_uniform('viewMatrix', jupiter_view_matrix);
+	update_uniform('viewMatrix', mmult(jupiter_view_matrix, scale(jupiter_size)));
 	jupiter_infos["texture"].bind(0);
 	jupiter_infos["renderer"].draw(gl.TRIANGLES);
 
 	// SATURN
-	update_uniform('viewMatrix', saturn_view_matrix);
+	update_uniform('viewMatrix', mmult(saturn_view_matrix, scale(saturn_size)));
 	saturn_infos["texture"].bind(0);
 	saturn_infos["renderer"].draw(gl.TRIANGLES);
 
-	// URANUS
-	update_uniform('viewMatrix', uranus_view_matrix);
-	uranus_infos["texture"].bind(0);
-	uranus_infos["renderer"].draw(gl.TRIANGLES);
-
-	// NEPTUNE
-	update_uniform('viewMatrix', neptune_view_matrix);
-	neptune_infos["texture"].bind(0);
-	neptune_infos["renderer"].draw(gl.TRIANGLES);
-
-	unbind_shader();
-	unbind_texture2d();
-
+	// // URANUS
+	// update_uniform('viewMatrix', uranus_view_matrix);
+	// uranus_infos["texture"].bind(0);
+	// uranus_infos["renderer"].draw(gl.TRIANGLES);
+  //
+	// // NEPTUNE
+	// update_uniform('viewMatrix', neptune_view_matrix);
+	// neptune_infos["texture"].bind(0);
+	// neptune_infos["renderer"].draw(gl.TRIANGLES);
+  //
+	// unbind_shader();
+	// unbind_texture2d();
+  //
   /**************************/
   /**DOUBLE TEXTURING EARTH**/
   /**************************/
 
   double_texture_program.bind();
-  update_uniform('viewMatrix', earth_view_matrix);
+  update_uniform('viewMatrix', mmult(earth_view_matrix, earth_size));
   update_uniform('projectionMatrix', projection_matrix);
   update_uniform('time', ewgl_current_time/6);
 
@@ -199,55 +199,48 @@ function draw_wgl()
 	update_uniform('nb', ELLIPSE_PRECISION);
 	update_uniform('z_position', 0);
 
-	/**
-   * Radius of an ellipse :
-	 * Previous planet's size
-	 * + (this planet's distance to its reference * its scale)
-	 * - (this planet's size/2)
-	 */
-
 	// MERCURY
-	update_uniform('radius', 1.0 /*sun radius*/ + mercury_distance*0.1 /*sun scale*/ - mercury_size/2);
+	update_uniform('radius', sun_size + mercury_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// VENUS
-	update_uniform('radius', mercury_size + venus_distance*venus_size - venus_size/2);
+	update_uniform('radius', sun_size + venus_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// EARTH
-	update_uniform('radius', venus_size + earth_distance*earth_size - earth_size/2);
+	update_uniform('radius', sun_size + earth_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// MARS
-	update_uniform('radius', earth_size + mars_distance*mars_size - mars_size/2);
+	update_uniform('radius', sun_size + mars_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// JUPITER
-	update_uniform('radius', mars_size + jupiter_distance*jupiter_size - jupiter_size/2);
+	update_uniform('radius', sun_size + jupiter_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// SATURN
-	update_uniform('radius', jupiter_size + saturn_distance*saturn_size - saturn_size/2);
+	update_uniform('radius', sun_size + saturn_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
 	// URANUS
-	update_uniform('radius', saturn_size + uranus_distance*uranus_size - uranus_size/2);
+	update_uniform('radius', sun_size + uranus_distance);
 	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
-	// NEPTUNE
-	update_uniform('radius', uranus_size + neptune_distance*neptune_size - neptune_size/2);
-	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
-
-  // MOON
-  y_circle_program.bind();
-  update_uniform('projectionMatrix', projection_matrix);
-  update_uniform('viewMatrix', solar_system);
-  update_uniform('y_position', moon_size/2);
-  update_uniform('color', 255, 255, 255);
-  update_uniform('nb', ELLIPSE_PRECISION);
-	update_uniform('viewMatrix', earth_view_matrix);
-	update_uniform('radius', moon_distance*moon_size);
-	gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+	// // NEPTUNE
+	// update_uniform('radius', uranus_size + neptune_distance*neptune_size - neptune_size/2);
+	// gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
+  //
+  // // MOON
+  // y_circle_program.bind();
+  // update_uniform('projectionMatrix', projection_matrix);
+  // update_uniform('viewMatrix', solar_system);
+  // update_uniform('y_position', moon_size/2);
+  // update_uniform('color', 255, 255, 255);
+  // update_uniform('nb', ELLIPSE_PRECISION);
+	// update_uniform('viewMatrix', earth_view_matrix);
+	// update_uniform('radius', moon_distance*moon_size);
+	// gl.drawArrays(gl.LINE_LOOP, 0, ELLIPSE_PRECISION);
 
   /**************/
   /**DRAW RINGS**/
@@ -257,7 +250,7 @@ function draw_wgl()
   update_uniform('nb', ELLIPSE_PRECISION);
 
   drawSaturnRings();
-  drawUranusRings();
+  // drawUranusRings();
 
   unbind_shader();
   unbind_texture2d();

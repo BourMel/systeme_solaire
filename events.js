@@ -12,14 +12,14 @@ document.addEventListener('keypress', function (e) {
         break;
 
       case 43: // +
-        if(DISTANCE < 10) {
+        if(DISTANCE < 1) {
           DISTANCE += 0.01;
           update_distances();
           draw_wgl();
         }
         break;
       case 45: // -
-        if(DISTANCE > 0.8) {
+        if(DISTANCE > 0.08) {
           DISTANCE -= 0.01;
           update_distances();
           draw_wgl();
