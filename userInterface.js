@@ -37,7 +37,6 @@ function displayInformations() {
   mercury_text = Mesh.Grid(80);
   venus_text = Mesh.Grid(80);
   earth_text = Mesh.Grid(80);
-  // moon_text = Mesh.Grid(80);
   mars_text = Mesh.Grid(80);
   jupiter_text = Mesh.Grid(80);
   saturn_text = Mesh.Grid(80);
@@ -48,7 +47,6 @@ function displayInformations() {
   mercury_text_r = mercury_text.renderer(true, false, true);
   venus_text_r = mercury_text.renderer(true, false, true);
   earth_text_r = earth_text.renderer(true, false, true);
-  // moon_text_r = earth_text.renderer(true, false, true);
   mars_text_r = earth_text.renderer(true, false, true);
   jupiter_text_r = earth_text.renderer(true, false, true);
   saturn_text_r = earth_text.renderer(true, false, true);
@@ -59,7 +57,6 @@ function displayInformations() {
   mercury_text_t = Texture2d();
   venus_text_t = Texture2d();
   earth_text_t = Texture2d();
-  // moon_text_t = Texture2d();
   mars_text_t = Texture2d();
   jupiter_text_t = Texture2d();
   saturn_text_t = Texture2d();
@@ -71,7 +68,6 @@ function displayInformations() {
     mercury_text_t.load("./images/mercury_text.jpg"),
     venus_text_t.load("./images/venus_text.jpg"),
     earth_text_t.load("./images/earth_text.jpg"),
-    // moon_text_t.load("./images/moon_text.jpg"),
     mars_text_t.load("./images/mars_text.jpg"),
     jupiter_text_t.load("./images/jupiter_text.jpg"),
     saturn_text_t.load("./images/saturn_text.jpg"),

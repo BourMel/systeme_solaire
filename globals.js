@@ -1,5 +1,3 @@
-// @TODO: options/controls in user interface
-
 var PAUSE_MODE = false;
 var INFO_MODE = true;
 var DISTANCE = 0.5;
@@ -96,7 +94,6 @@ let sun_text_r = null;
 var mercury_text_r = null;
 var venus_text_r = null;
 var earth_text_r = null;
-// let moon_text_r = null;
 let mars_text_r = null;
 let jupiter_text_r = null;
 let saturn_text_r = null;
@@ -108,7 +105,6 @@ let sun_text_t = null;
 var mercury_text_t = null;
 var venus_text_t = null;
 var earth_text_t = null;
-// let moon_text_t = null;
 let mars_text_t = null;
 let jupiter_text_t = null;
 let saturn_text_t = null;

@@ -4,8 +4,6 @@
 
 /** VERTEX SHADER **/
 
-// @TODO : billboard
-
 var textVertexShader = `#version 300 es
 
 uniform mat4 projectionMatrix;
